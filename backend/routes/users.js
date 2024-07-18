@@ -59,9 +59,11 @@ router.post('/logout', function (req, res) {
   res.send({ result: true, message: 'Successfully disconnected' });
 });
 
-router.post('/likePost', function (req, res) {
-  if (req.isLogged && req.post) {
-
+router.post('/likePost', async function (req, res) {
+  if (req.body.username && req.body.token && req.body.postID) {
+    const foundUser = await User.findOne({ username: req.body.username, token: req.body.token });
+    foundUser.likedPosts.push(req.body.postID);
+    foundUser.save();
     res.send({ result: true, like: !req.post.like });
   } else {
     res.send({ result: false, error: "Please login and use correct post ID" });
