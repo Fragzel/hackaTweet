@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     isConnected: false,
     token: '',
-    username: ''
+    username: '',
+    firstname: ''
 };
 
 export const userSlice = createSlice({
@@ -15,11 +16,13 @@ export const userSlice = createSlice({
             state.isConnected = true;
             state.token = action.payload.token;
             state.username = action.payload.username;
+            state.firstname = action.payload.firstname;
         },
         logout: (state, action) => {
             state.isConnected = false;
             state.token = "";
             state.username = "";
+            state.firstname = "";
         },
     },
 });

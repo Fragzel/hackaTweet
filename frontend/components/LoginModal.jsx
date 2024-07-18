@@ -32,6 +32,7 @@ function LoginModal(props) {
         if (response.result) {
             dispatch(login({
                 token: response.token,
+                firstname: response.firstname,
                 username: signinUsername
             }))
             setSigninUsername("")
@@ -58,6 +59,7 @@ function LoginModal(props) {
         if (response.result) {
             dispatch(login({
                 token: response.token,
+                firstname: response.firstname,
                 username: signupUsername
             }))
             setSignupUsername("")

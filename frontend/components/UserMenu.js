@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux'
 
 function UserMenu() {
 
+
   const user = useSelector((state) => state.user)
+  console.log(user)
 
 
   return (
@@ -17,8 +19,8 @@ function UserMenu() {
           <div className={styles.userInfo}>
             <div><img className={styles.userImage} src='/images/Khaled.jpg' width={'50px'}></img></div>
             <div>
-              <div>{user.firstname} Prenom</div>
-              <div className={styles.username}>@username</div>
+              <div>{user.firstname}</div>
+              <div className={styles.username}>@{user.username}</div>
             </div>
           </div>
           <div className={styles.logout}>Logout</div>
