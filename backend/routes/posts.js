@@ -33,11 +33,13 @@ router.post('/add', async (req, res) => {
 });
 
 // REMOVE POST
-router.post('/remove', (req, res) => {
+router.post('/remove', async (req, res) => {
   if (!checkBody(req.body, ['postID'])) {
     res.json({ result: false, error: 'Missing or empty fields' });
     return;
   }
+  const deletePost = await Post.deleteOne({ _id: req.body.postID })
+  res.json({ result: true, message: "post Deleted" })
 
 
 });
@@ -47,6 +49,17 @@ router.get('/all', async function (req, res) {
   const foundPosts = await Post.find();
   res.send({ result: true, allPosts: foundPosts });
 });
+
+// VIEW ALL POST WITH THIS # A tester, piti doute
+router.get("/hashtags/:hashtag", async (req, res) => {
+
+  const foundHashtagsPosts = await Post.find({ _id: req.params.hashtag })
+  if (foundHashtagsPosts.length) {
+    res.send({ result: true, allHashtagsPost: foundHashtagsPosts })
+  } else {
+    res.send({ result: false, error: "Aucun post trouvé avec ce Hashtag ! " })
+  }
+})
 
 
 module.exports = router;

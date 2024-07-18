@@ -62,9 +62,7 @@ function LoginModal(props) {
             }))
             setSignupUsername("")
             setSignupPassword("")
-
         }
-
     }
 
 
