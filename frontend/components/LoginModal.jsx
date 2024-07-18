@@ -23,9 +23,9 @@ function LoginModal(props) {
             username: signinUsername,
             password: signinPassword
         }
-        const request = await fetch("http://localhost:3000/users/sigin", {
+        const request = await fetch("http://localhost:3000/users/signin", {
             method: "POST",
-            headers: { "Content-type": "application/json" },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
         })
         const response = await request.json()
@@ -48,9 +48,9 @@ function LoginModal(props) {
             password: signinPassword,
 
         }
-        const request = await fetch("http://localhost:3000/users/sigup", {
+        const request = await fetch("http://localhost:3000/users/signup", {
             method: "POST",
-            headers: { "Content-type": "application/json" },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
         })
         const response = await request.json()
