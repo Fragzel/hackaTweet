@@ -59,4 +59,13 @@ router.post('/logout', function (req, res) {
   res.send({ result: true, message: 'Successfully disconnected' });
 });
 
+router.post('/likePost', function (req, res) {
+  if (req.isLogged && req.post) {
+
+    res.send({ result: true, like: !req.post.like });
+  } else {
+    res.send({ result: false, error: "Please login and use correct post ID" });
+  }
+});
+
 module.exports = router;
