@@ -7,10 +7,11 @@
   padding: 0;
   color: white;
   background-image: url(../public/images/logo_twitter.png);
-  background-position: top;
+  background-position: top left;
   background-size: 50px;
   background-repeat: no-repeat;
-  margin: 2vw;
+  margin-left: 2vw;
+  margin-top: 4vh;
 }
 
 .title {
@@ -29,81 +30,6 @@
   text-decoration: underline;
 }
 
-.leftsection {
-  border-right: solid #374b65 1px;
-  height: 100vh;
-  width: 20vw;
-  display: flex;
-  justify-content: space-between;
-}
-
-.centersection {
-  height: 100vh;
-  width: 50vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-
-}
-
-.rightsection {
-  border-left: solid #3f5774 1px;
-  height: 100vh;
-  width: 30vw;
-  display: flex;
-  justify-content: space-between;
-}
-
-.centerheader {
-  font-weight: 600;
-  font-size: large;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.inputBlock {
-  height: 120px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-
-.post {
-  min-height: 100px;
-  background-color: #252c35;
-}
-
-.input {
-  background-color: transparent;
-  border: 1px #3f5774 #3f5774;
-  width: 40vw;
-  height: 30px;
-  color: white;
-}
-
-.inputUnderSection {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  width: 40vw;
-  font-size: smaller;
-}
-
-.tweetButton {
-  background-color: #0070f3;
-  padding: 4px;
-  margin: 10px;
-  width: 90px;
-  height: 30px;
-  text-align: center;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
 .logout {
   display: flex;
   justify-content: center;
@@ -120,4 +46,21 @@
 .userInfo {
   display: flex;
   flex-direction: row;
+}
+
+.userImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 1%;
+}
+
+.menubutton {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+}
+
+.username {
+  color: gray
 }
