@@ -17,10 +17,6 @@ function Home() {
         <div className={styles.leftsection}>
           <UserMenu />
         </div>
-
-
-
-
         <div className={styles.centersection}>
           <div className={styles.centerheader}>
             <div>Home</div>
@@ -34,11 +30,12 @@ function Home() {
             </div>
           </div>
 
-          <div className={styles.post}>Post1
+          <div >
+            <Tweet />
+            <Tweet />
             <Tweet />
           </div>
-          <div className={styles.post}>Post2</div>
-          <div className={styles.post}>Post3</div>
+
 
         </div>
 
