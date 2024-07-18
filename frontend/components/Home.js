@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.css';
 import Trends from './Trends';
+import UserMenu from './UserMenu';
 import Tweet from './Tweet';
 import { useState } from 'react';
 
@@ -14,7 +15,7 @@ function Home() {
 
 
         <div className={styles.leftsection}>
-          SECTION 1
+          <UserMenu />
         </div>
 
 
