@@ -4,7 +4,8 @@ const initialState = {
     isConnected: false,
     token: '',
     username: '',
-    firstname: ''
+    firstname: '',
+    image: ''
 };
 
 export const userSlice = createSlice({
@@ -17,12 +18,14 @@ export const userSlice = createSlice({
             state.token = action.payload.token;
             state.username = action.payload.username;
             state.firstname = action.payload.firstname;
+            state.image = action.payload.image;
         },
         logout: (state, action) => {
             state.isConnected = false;
             state.token = "";
             state.username = "";
             state.firstname = "";
+            state.image = "";
         },
     },
 });

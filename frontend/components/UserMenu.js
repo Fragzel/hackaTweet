@@ -17,7 +17,7 @@ function UserMenu() {
 
         <div>
           <div className={styles.userInfo}>
-            <div><img className={styles.userImage} src='/images/Khaled.jpg' width={'50px'}></img></div>
+            <div><img className={styles.userImage} src={user.image} width={'50px'}></img></div>
             <div>
               <div>{user.firstname}</div>
               <div className={styles.username}>@{user.username}</div>

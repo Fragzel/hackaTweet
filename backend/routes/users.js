@@ -30,7 +30,7 @@ router.post('/signup', (req, res) => {
 
       newUser.save().then(newDoc => {
 
-        res.json({ result: true, token: newDoc.token });
+        res.json({ result: true, token: newDoc.token, firstname: newDoc.firstname, image: newDoc.image });
       });
     } else {
       // User already exists in database
@@ -48,7 +48,7 @@ router.post('/signin', (req, res) => {
 
   User.findOne({ username: req.body.username }).then(data => {
     if (data && bcrypt.compareSync(req.body.password, data.password)) {
-      res.json({ result: true, token: data.token });
+      res.json({ result: true, token: data.token, firstname: data.firstname, image: data.image });
     } else {
       res.json({ result: false, error: 'User not found or wrong password' });
     }
@@ -57,7 +57,7 @@ router.post('/signin', (req, res) => {
 
 // LOG OUT
 router.post('/logout', function (req, res) {
-  res.send({ result: true, message: 'Successfully disconnected' });
+  res.json({ result: true, message: 'Successfully disconnected' });
 });
 
 //LIKE POST
@@ -66,9 +66,9 @@ router.post('/likePost', async function (req, res) {
     const foundUser = await User.findOne({ username: req.body.username, token: req.body.token });
     foundUser.likedPosts.push(req.body.postID);
     foundUser.save();
-    res.send({ result: true, like: !req.body.like });
+    res.json({ result: true, like: !req.body.like });
   } else {
-    res.send({ result: false, error: "Please login and use correct post ID" });
+    res.json({ result: false, error: "Please login and use correct post ID" });
   }
 });
 
@@ -79,9 +79,9 @@ router.post("/unlikePost", async function (req, res) {
     foundUser.likedPosts = foundUser.likedPosts.filter(e => e !== req.body.postID)
     foundUser.save();
 
-    res.send({ result: true, message: "Sucessfully unliked" });
+    res.json({ result: true, message: "Sucessfully unliked" });
   } else {
-    res.send({ result: false, error: "Please login and use correct post ID" });
+    res.json({ result: false, error: "Please login and use correct post ID" });
   }
 });
 
