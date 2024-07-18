@@ -15,8 +15,12 @@ function Tweet() {
             </div>
             <div className={styles.messageAndHeart} >
                 <span>Message raciste random </span>
+                <span>{/*insérer la date a laquelle le post a été crée. */}</span>
             </div>
-            <FontAwesomeIcon className={styles.faHeart} icon={faHeart} /> 0
+            <div className={styles.faHeartContainer}>
+                <FontAwesomeIcon className={styles.faHeart} icon={faHeart} />
+                <span className={styles.count}>0</span>
+            </div>
         </div>
     );
 }
