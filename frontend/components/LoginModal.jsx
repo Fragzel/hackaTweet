@@ -41,6 +41,30 @@ function LoginModal(props) {
 
     }
 
+    const signUp = async () => {
+        const body = {
+            firstname: signupFirstname,
+            username: signinUsername,
+            password: signinPassword,
+
+        }
+        const request = await fetch("http://localhost:3000/users/sigup", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(body)
+        })
+        const response = await request.json()
+        if (response.result) {
+            dispatch(login({
+                token: response.token,
+                username: signupUsername
+            }))
+            setSignupUsername("")
+            setSignupPassword("")
+
+        }
+
+    }
 
 
     if (props.isSignin) {
@@ -91,7 +115,7 @@ function LoginModal(props) {
                     <input type="text" className={styles.input} placeholder='Firstname' onChange={(e) => setSignupFirstname(e.target.value)} value={signupFirstname} />
                     <input className={styles.input} placeholder='Username' onChange={(e) => setSignupUsername(e.target.value)} value={signupUsername} />
                     <input className={styles.input} placeholder='Password' onChange={(e) => setSignupPassword(e.target.value)} value={signupPassword} />
-                    <button className={styles.loginBtn} >Sign Up</button>
+                    <button className={styles.loginBtn} onClick={signUp} >Sign Up</button>
 
                 </form>
             </div>
