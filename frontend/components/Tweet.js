@@ -4,17 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 
-function Tweet() {
+function Tweet(props) {
 
     return (
         <div className={styles.tweetContainer}>
             <div className={styles.imageAndUsername}>
                 <img className={styles.avatar} src="/images/Khaled.jpg" />
-                <span className={styles.name}>Khaled</span> <span className={styles.arobase}>@khaledLeBoss</span>
+                <span className={styles.name}>{props.username}</span> <span className={styles.arobase}>@{props.username}Adresse Mail random</span>
 
             </div>
             <div className={styles.messageAndHeart} >
-                <span>Message raciste random </span>
+                <span>{props.message} </span>
                 <span>{/*insérer la date a laquelle le post a été crée. */}</span>
             </div>
             <div className={styles.faHeartContainer}>

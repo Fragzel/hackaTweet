@@ -2,6 +2,8 @@ import styles from '../styles/Login.module.css';
 import LoginModal from '../components/LoginModal';
 import { useState } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 function Login() {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isSignin, setIsSignin] = useState(false)

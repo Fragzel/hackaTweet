@@ -18,11 +18,11 @@ export const userSlice = createSlice({
         },
         logout: (state, action) => {
             state.isConnected = false;
-            state.token = action.payload.token;
-            state.username = action.payload.username;
+            state.token = "";
+            state.username = "";
         },
     },
 });
 
-export const { login } = userSlice.actions;
+export const { login, logout } = userSlice.actions;
 export default userSlice.reducer;
