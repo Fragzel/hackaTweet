@@ -1,10 +1,11 @@
 .main {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   min-height: 100vh;
-  padding: 4rem 0;
+  padding: 0;
+  color: white;
 }
 
 .title {
@@ -17,6 +18,83 @@
   text-decoration: none;
 }
 
-.title a:hover, .title a:focus, .title a:active {
+.title a:hover,
+.title a:focus,
+.title a:active {
   text-decoration: underline;
+}
+
+.leftsection {
+  border-right: solid white 1px;
+  height: 100vh;
+  width: 20vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.centersection {
+  height: 100vh;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+}
+
+.rightsection {
+  border-left: solid white 1px;
+  height: 100vh;
+  width: 30vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.centerheader {
+  font-weight: 600;
+  font-size: large;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputBlock {
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.post {
+  min-height: 100px;
+  background-color: #252c35;
+}
+
+.input {
+  background-color: transparent;
+  border: 1px #2533af wheat;
+  width: 40vw;
+  height: 30px;
+  color: white;
+}
+
+.inputUnderSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 40vw;
+  font-size: smaller;
+}
+
+.tweetButton {
+  background-color: #0070f3;
+  padding: 4px;
+  margin: 10px;
+  width: 90px;
+  height: 30px;
+  text-align: center;
+  border-radius: 20px;
+  cursor: pointer;
 }
