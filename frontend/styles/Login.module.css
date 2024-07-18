@@ -4,7 +4,7 @@
 }
 
 .leftPart {
-    border: 1px solid black;
+
     width: 40vw;
     height: 100vh;
     background-image: url("/images/twitter_bg.png");
@@ -42,4 +42,28 @@
 
 .logoLeft {
     width: 50%;
+}
+
+.signinBtn {
+    width: 50%;
+    height: 50%;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 30px;
+    background-color: #3690ED;
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+
+.signupBtn {
+    width: 50%;
+    height: 50%;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 30px;
+    background-color: #151D27;
+    color: #006EED;
+    border: white 1px solid;
+    font-weight: bold;
 }
