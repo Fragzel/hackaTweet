@@ -1,8 +1,11 @@
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+require('./models/connection')
 var logger = require('morgan');
-
+require('dotenv').config();
+const cors = require('cors');
+app.use(cors());
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
