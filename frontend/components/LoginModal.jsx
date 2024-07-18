@@ -1,35 +1,52 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { useState } from 'react';
 import Modal from 'react-modal';
 import styles from '../styles/LoginModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
-
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-    },
-};
+import { useDispatch } from "react-redux"
+import { login } from "../reducers/user"
 
 
 function LoginModal(props) {
-    let subtitle;
+    const [signupFirstname, setSignupFirstname] = useState("")
+    const [signupUsername, setSignupUsername] = useState("")
+    const [signupPassword, setSignupPassword] = useState("")
 
-    function afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        subtitle.style.color = '#f00';
+
+    const [signinUsername, setSigninUsername] = useState("")
+    const [signinPassword, setSigninPassword] = useState("")
+
+    const dispatch = useDispatch()
+
+    const signIn = async () => {
+        const body = {
+            username: signinUsername,
+            password: signinPassword
+        }
+        const request = await fetch("http://localhost:3000/users/sigin", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(body)
+        })
+        const response = await request.json()
+        if (response.result) {
+            dispatch(login({
+                token: response.token,
+                username: signinUsername
+            }))
+            setSigninUsername("")
+            setSigninPassword("")
+
+        }
+
     }
+
+
 
     if (props.isSignin) {
         return (
             <Modal
                 isOpen={props.modalIsOpen}
-                onAfterOpen={afterOpenModal}
                 onRequestClose={props.closeModal}
                 className={styles.content}
                 contentLabel="Example Modal"
@@ -40,12 +57,12 @@ function LoginModal(props) {
                     </div>
                     <div className={styles.modalContainer}>
                         <img className={styles.modalLogo} src="/images/logo_twitter.png"></img>
-                        <h2 className={styles.title} ref={(_subtitle) => (subtitle = _subtitle)}>Connect to Hackatweet </h2>
+                        <h2 className={styles.title}>Connect to Hackatweet </h2>
 
                         <form className={styles.form}>
-                            <input className={styles.input} placeholder='Username' />
-                            <input className={styles.input} placeholder='Password' />
-                            <button className={styles.input} >Sign Up</button>
+                            <input className={styles.input} placeholder='Username' onChange={(e) => setSigninUsername(e.target.value)} value={signinUsername} />
+                            <input className={styles.input} placeholder='Password' onChange={(e) => setSigninPassword(e.target.value)} value={signinPassword} />
+                            <button className={styles.loginBtn} onClick={signIn} >Sign in</button>
 
                         </form>
                     </div>
@@ -57,7 +74,6 @@ function LoginModal(props) {
     return (
         <Modal
             isOpen={props.modalIsOpen}
-            onAfterOpen={afterOpenModal}
             onRequestClose={props.closeModal}
             className={styles.content}
             contentLabel="Example Modal"
@@ -69,13 +85,13 @@ function LoginModal(props) {
             <div className={styles.modalContainer}>
 
                 <img className={styles.modalLogo} src="/images/logo_twitter.png"></img>
-                <h2 className={styles.title} ref={(_subtitle) => (subtitle = _subtitle)}>Create your Hackatweet account</h2>
+                <h2 className={styles.title} >Create your Hackatweet account</h2>
 
                 <form className={styles.form}>
-                    <input className={styles.input} placeholder='Firstname' />
-                    <input className={styles.input} placeholder='Username' />
-                    <input className={styles.input} placeholder='Password' />
-                    <button className={styles.input} >Sign Up</button>
+                    <input type="text" className={styles.input} placeholder='Firstname' onChange={(e) => setSignupFirstname(e.target.value)} value={signupFirstname} />
+                    <input className={styles.input} placeholder='Username' onChange={(e) => setSignupUsername(e.target.value)} value={signupUsername} />
+                    <input className={styles.input} placeholder='Password' onChange={(e) => setSignupPassword(e.target.value)} value={signupPassword} />
+                    <button className={styles.loginBtn} >Sign Up</button>
 
                 </form>
             </div>

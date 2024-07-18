@@ -28,9 +28,9 @@ function Login() {
                     <h1 className={styles.title}>See what's happening</h1>
                     <h3 className={styles.text}>Join Hackatweet today</h3>
                     <div className={styles.sign}>
-                        <button onClick={() => openModal(true)} className={styles.signinBtn}>Sign-in</button>
-                        <span>Already have an account ?</span>
                         <button onClick={() => openModal(false)} className={styles.signupBtn}>Sign-up</button>
+                        <span>Already have an account ?</span>
+                        <button onClick={() => openModal(true)} className={styles.signinBtn}>Sign-in</button>
                     </div>
                 </div>
                 <LoginModal closeModal={closeModal} modalIsOpen={modalIsOpen} isSignin={isSignin} />
