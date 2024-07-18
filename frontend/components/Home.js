@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.css';
 import Trends from './Trends';
+import Tweet from './Tweet';
 import { useState } from 'react';
 
 function Home() {
@@ -32,7 +33,9 @@ function Home() {
             </div>
           </div>
 
-          <div className={styles.post}>Post1</div>
+          <div className={styles.post}>Post1
+            <Tweet />
+          </div>
           <div className={styles.post}>Post2</div>
           <div className={styles.post}>Post3</div>
 
