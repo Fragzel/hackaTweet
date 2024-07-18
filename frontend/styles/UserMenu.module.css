@@ -1,11 +1,16 @@
 .main {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  min-height: 100vh;
+  height: 90vh;
   padding: 0;
   color: white;
+  background-image: url(../public/images/logo_twitter.png);
+  background-position: top;
+  background-size: 50px;
+  background-repeat: no-repeat;
+  margin: 2vw;
 }
 
 .title {
@@ -97,4 +102,22 @@
   text-align: center;
   border-radius: 20px;
   cursor: pointer;
+}
+
+.logout {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+  width: 70px;
+  height: 20px;
+  text-align: center;
+  font-size: smaller;
+  border-radius: 20px;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: row;
 }
