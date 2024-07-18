@@ -29,6 +29,7 @@ router.post('/signup', (req, res) => {
       });
 
       newUser.save().then(newDoc => {
+
         res.json({ result: true, token: newDoc.token });
       });
     } else {

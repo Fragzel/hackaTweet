@@ -44,8 +44,8 @@ function LoginModal(props) {
     const signUp = async () => {
         const body = {
             firstname: signupFirstname,
-            username: signinUsername,
-            password: signinPassword,
+            username: signupUsername,
+            password: signupPassword,
 
         }
         const request = await fetch("http://localhost:3000/users/signup", {
@@ -54,6 +54,7 @@ function LoginModal(props) {
             body: JSON.stringify(body)
         })
         const response = await request.json()
+        console.log(response)
         if (response.result) {
             dispatch(login({
                 token: response.token,
@@ -83,12 +84,12 @@ function LoginModal(props) {
                         <img className={styles.modalLogo} src="/images/logo_twitter.png"></img>
                         <h2 className={styles.title}>Connect to Hackatweet </h2>
 
-                        <form className={styles.form}>
+                        <div className={styles.form}>
                             <input className={styles.input} placeholder='Username' onChange={(e) => setSigninUsername(e.target.value)} value={signinUsername} />
                             <input className={styles.input} placeholder='Password' onChange={(e) => setSigninPassword(e.target.value)} value={signinPassword} />
                             <button className={styles.loginBtn} onClick={signIn} >Sign in</button>
 
-                        </form>
+                        </div>
                     </div>
                 </div>
             </Modal >
@@ -111,13 +112,13 @@ function LoginModal(props) {
                 <img className={styles.modalLogo} src="/images/logo_twitter.png"></img>
                 <h2 className={styles.title} >Create your Hackatweet account</h2>
 
-                <form className={styles.form}>
+                <div className={styles.form}>
                     <input type="text" className={styles.input} placeholder='Firstname' onChange={(e) => setSignupFirstname(e.target.value)} value={signupFirstname} />
                     <input className={styles.input} placeholder='Username' onChange={(e) => setSignupUsername(e.target.value)} value={signupUsername} />
                     <input className={styles.input} placeholder='Password' onChange={(e) => setSignupPassword(e.target.value)} value={signupPassword} />
                     <button className={styles.loginBtn} onClick={signUp} >Sign Up</button>
 
-                </form>
+                </div>
             </div>
         </Modal>
     );
