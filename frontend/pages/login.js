@@ -21,9 +21,8 @@ function Login() {
             <main className={styles.main}>
 
                 <div className={styles.leftPart}>
-
+                    <img src="/images/logo_twitter.png" className={styles.logoLeft} />
                 </div>
-
                 <div className={styles.rightPart}>
                     <img className={styles.twitterLogo} src='/images/logo_twitter.png' />
                     <h1 className={styles.title}>See what's happening</h1>

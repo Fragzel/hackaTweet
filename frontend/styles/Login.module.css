@@ -8,6 +8,9 @@
     width: 40vw;
     height: 100vh;
     background-image: url("/images/twitter_bg.png");
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .title {
@@ -16,6 +19,7 @@
 
 .twitterLogo {
     width: 5vw;
+
 }
 
 .text {
@@ -26,10 +30,15 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    margin-left: 25px;
 }
 
 .sign {
     display: flex;
     flex-direction: column;
     color: white
+}
+
+.logoLeft {
+    width: 50%;
 }

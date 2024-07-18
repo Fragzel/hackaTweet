@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import styles from '../styles/LoginModal.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faX } from '@fortawesome/free-solid-svg-icons'
 
 const customStyles = {
     content: {
@@ -32,18 +34,23 @@ function LoginModal(props) {
                 className={styles.content}
                 contentLabel="Example Modal"
             >
-                <div className={styles.modalContainer}>
-                    <img className={styles.modalLogo} src="/images/logo_twitter.png"></img>
-                    <h2 className={styles.title} ref={(_subtitle) => (subtitle = _subtitle)}>Connect to Hackatweet </h2>
+                <div >
+                    <div className={styles.faX} >
+                        <FontAwesomeIcon icon={faX} onClick={props.closeModal} />
+                    </div>
+                    <div className={styles.modalContainer}>
+                        <img className={styles.modalLogo} src="/images/logo_twitter.png"></img>
+                        <h2 className={styles.title} ref={(_subtitle) => (subtitle = _subtitle)}>Connect to Hackatweet </h2>
 
-                    <form className={styles.form}>
-                        <input className={styles.input} placeholder='Username' />
-                        <input className={styles.input} placeholder='Password' />
-                        <button className={styles.input} >Sign Up</button>
+                        <form className={styles.form}>
+                            <input className={styles.input} placeholder='Username' />
+                            <input className={styles.input} placeholder='Password' />
+                            <button className={styles.input} >Sign Up</button>
 
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </Modal>
+            </Modal >
         );
     }
 
@@ -55,7 +62,12 @@ function LoginModal(props) {
             className={styles.content}
             contentLabel="Example Modal"
         >
+
+            <div className={styles.faX} >
+                <FontAwesomeIcon icon={faX} onClick={props.closeModal} />
+            </div>
             <div className={styles.modalContainer}>
+
                 <img className={styles.modalLogo} src="/images/logo_twitter.png"></img>
                 <h2 className={styles.title} ref={(_subtitle) => (subtitle = _subtitle)}>Create your Hackatweet account</h2>
 
