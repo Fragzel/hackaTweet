@@ -46,6 +46,8 @@
 .userInfo {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  margin: 1px;
 }
 
 .userImage {
@@ -53,6 +55,7 @@
   height: 50px;
   border-radius: 50%;
   margin: 1%;
+  margin-right: 10px;
 }
 
 .menubutton {
@@ -62,5 +65,6 @@
 }
 
 .username {
-  color: gray
+  color: gray;
+  font-size: small;
 }
