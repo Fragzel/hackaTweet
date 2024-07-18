@@ -25,6 +25,7 @@
 
 .text {
     color: white;
+    margin-bottom: 10px;
 }
 
 .rightPart {
@@ -47,7 +48,8 @@
 .signupBtn {
     width: 50%;
     height: 50%;
-    margin: 10px;
+    margin-left: 10px;
+    margin-bottom: 30px;
     padding: 10px;
     border-radius: 30px;
     background-color: #3690ED;
