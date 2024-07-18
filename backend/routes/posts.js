@@ -16,7 +16,7 @@ router.post('/add', async (req, res) => {
   }
 
   const foundUser = await User.findOne({ token: req.body.token });
-  console.log(foundUser.username)
+  // console.log(foundUser.username)
   if (req.body.author === foundUser.username) {
     const newPost = new Post({
       author: foundUser._id,
@@ -46,7 +46,13 @@ router.post('/remove', async (req, res) => {
 
 // VIEW ALL POSTS
 router.get('/all', async function (req, res) {
-  const foundPosts = await Post.find();
+  const request = await Post.find();
+  let foundPosts = []
+  for (let i = 0; i < request.length; i++) {
+    foundPosts.push(await request[i].populate('author'))
+  }
+
+  // const foundPopulatePosts = foundPosts.populate("author")
   res.send({ result: true, allPosts: foundPosts });
 });
 

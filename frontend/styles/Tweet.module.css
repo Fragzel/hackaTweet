@@ -49,3 +49,10 @@
 .count {
     margin-left: 1%;
 }
+
+.date {
+    display: flex;
+    justify-content: center;
+    color: grey;
+    margin-left: 10px;
+}

@@ -10,7 +10,10 @@ function Tweet(props) {
         <div className={styles.tweetContainer}>
             <div className={styles.imageAndUsername}>
                 <img className={styles.avatar} src="/images/Khaled.jpg" />
-                <span className={styles.name}>{props.username}</span> <span className={styles.arobase}>@{props.username}Adresse Mail random</span>
+                <span className={styles.name}>{props.username}</span> <span className={styles.arobase}>@{props.username}</span>
+                <span className={styles.date}>{props.date}</span>
+            </div>
+            <div >
 
             </div>
             <div className={styles.messageAndHeart} >
