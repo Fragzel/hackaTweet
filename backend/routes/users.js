@@ -7,6 +7,8 @@ const User = require('../models/users');
 const uid2 = require('uid2');
 const bcrypt = require('bcrypt');
 const { checkBody } = require('../modules/tools')
+const Post = require('../models/posts');
+
 
 
 // SIGN UP
@@ -64,34 +66,27 @@ router.post('/logout', function (req, res) {
 router.post('/likePost', async function (req, res) {
   if (req.body.username && req.body.token && req.body.postID) {
     const foundUser = await User.findOne({ username: req.body.username, token: req.body.token });
-    console.log("founduser", foundUser)
-    console.log("req.body username ", req.body.username)
+
     if (foundUser && !foundUser.likedPosts.includes(req.body.postID)) {
+      const searchedPost = await Post.findOne({ _id: req.body.postID })
+      searchedPost.likedCount++
+      searchedPost.save()
+
+      console.log("serch", searchedPost)
       foundUser.likedPosts.push(req.body.postID);
       foundUser.save();
 
     } else if (foundUser && foundUser.likedPosts.includes(req.body.postID)) {
-      let test = foundUser.likedPosts
-      test = foundUser.likedPosts.filter(e => e !== req.body.postID);
-      console.log("test", test)
-      foundUser.save()
+      const searchedPost = await Post.findOne({ _id: req.body.postID })
+      searchedPost.likedCount--
+      searchedPost.save()
 
+      foundUser.likedPosts = foundUser.likedPosts.filter(e => e != req.body.postID);
+
+      foundUser.save()
     }
     res.json({ result: true, like: !req.body.like, likedPosts: foundUser.likedPosts });
 
-  } else {
-    res.json({ result: false, error: "Please login and use correct post ID" });
-  }
-});
-
-//UNLIKE POST A supprimer
-router.post("/unlikePost", async function (req, res) {
-  if (req.body.username && req.body.token && req.body.postID) {
-    const foundUser = await User.findOne({ username: req.body.username, token: req.body.token });
-    foundUser.likedPosts = foundUser.likedPosts.filter(e => e !== req.body.postID)
-    foundUser.save();
-
-    res.json({ result: true, message: "Sucessfully unliked" });
   } else {
     res.json({ result: false, error: "Please login and use correct post ID" });
   }
