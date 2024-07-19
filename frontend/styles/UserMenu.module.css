@@ -6,11 +6,9 @@
   height: 90vh;
   padding: 0;
   color: white;
-  background-image: url(../public/images/logo_twitter.png);
   background-position: top left;
   background-size: 50px;
   background-repeat: no-repeat;
-  margin-left: 2vw;
   margin-top: 4vh;
 }
 
@@ -41,6 +39,7 @@
   border-radius: 20px;
   border: 1px solid white;
   cursor: pointer;
+  margin-left: 2vw;
 }
 
 .userInfo {
@@ -48,6 +47,7 @@
   flex-direction: row;
   align-items: center;
   margin: 1px;
+  margin-left: 2vw;
 }
 
 .userImage {
@@ -67,4 +67,9 @@
 .username {
   color: gray;
   font-size: small;
+}
+
+.logoTwitter {
+  width: 60px;
+
 }

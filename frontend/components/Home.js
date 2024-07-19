@@ -36,7 +36,6 @@ function Home() {
 
   const newTweetPost = async () => {
 
-
     const newTweet = await fetch('http://localhost:3000/posts/add', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -46,6 +45,7 @@ function Home() {
         content: newTweetInput
       })
     })
+    useEtFetch()
   }
 
 
@@ -64,12 +64,20 @@ function Home() {
     }
   };
 
+  const Input = () => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        newTweetPost()
+        setNewTweetInput("")
+      }
+    }
+  }
   console.log("alltwitindb", allTweetInBd)
 
   const tweetedList = allTweetInBd.map((data, i) => {
     let dateDifference = timeSince(allTweetInBd[i].creationDate)
     return <Tweet username={data.author.username} message={data.content} date={dateDifference} />
-  })
+  }).reverse()
 
   return (
     <div>
@@ -86,7 +94,7 @@ function Home() {
             <input className={styles.input} type='text' maxLength='280' placeholder={"What's up ?"} onChange={(e) => newTweetInput.length < 280 && setNewTweetInput(e.target.value.slice(0, 280))} value={newTweetInput}></input>
             <div className={styles.inputUnderSection}>
               <div>{newTweetInput.length}/280</div>
-              <div className={styles.tweetButton} onClick={async () => { newTweetPost(); setNewTweetInput("") }}>Tweet</div>
+              <div className={styles.tweetButton} onClick={async () => { newTweetPost(); setNewTweetInput("") }}   >Tweet</div>
             </div>
           </div>
 
