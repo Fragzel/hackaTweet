@@ -10,20 +10,32 @@ function Home() {
   const [newTweetInput, setNewTweetInput] = useState('')
   const [allTweetInBd, setallTweetInBd] = useState([])
   const [allLikedPosts, setAllLikedPosts] = useState([])
-  const [hashtagString, setHashtagString] = useState('')
+  const [hashtagString, setHashtagString] = useState('');
+  const [completeHashtagString, setCompleteHashtagString] = useState('')
 
 
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
 
-  const recupererHashtag = () => {
+  useEffect(() => {
     if (newTweetInput.includes('#')) {
       const indexOfHashtagSymbol = newTweetInput.indexOf('#');
       console.log(indexOfHashtagSymbol);
-      // setHashtagString(newTweetInput.slice(indexOfHashtagSymbol, -1))
+      setHashtagString(newTweetInput.slice(indexOfHashtagSymbol));
+      if (hashtagString.includes(' ')) {
+        setCompleteHashtagString(hashtagString);
+      }
     }
-  }
+  }, [newTweetInput])
+
+
+  console.log('complete : ', completeHashtagString)
+
+
+
+
+
 
   const useEtFetch = async () => {
     const request = await fetch("http://localhost:3000/posts/all")
@@ -39,12 +51,12 @@ function Home() {
     setAllLikedPosts([])
     setAllLikedPosts(allLikedPostsResponse.allLikedPosts)
   }
+
   useEffect(() => {
     useEtFetch()
   }, []);
 
   const newTweetPost = async () => {
-
     const newTweet = await fetch('http://localhost:3000/posts/add', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -54,7 +66,20 @@ function Home() {
         content: newTweetInput
       })
     })
+    const response = newTweet.json();
     useEtFetch()
+
+    const addToHastags = async (data) => {
+      const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ hashtag: completeHashtagString, postId: data.postId })
+      };
+      const request = await fetch("http://localhost:3000/hashtags/add", options)
+      const response = await request.json();
+      console.log(response)
+    }
+    completeHashtagString && addToHastags(response);
   }
 
 
@@ -127,7 +152,7 @@ function Home() {
           </div>
 
           <div className={styles.inputBlock}>
-            <input className={styles.input} type='text' maxLength='280' placeholder={"What's up ?"} onChange={(e) => newTweetInput.length < 280 && setNewTweetInput(e.target.value.slice(0, 280)) && recupererHashtag()} value={newTweetInput}></input>
+            <input className={styles.input} type='text' maxLength='280' placeholder={"What's up ?"} onChange={(e) => newTweetInput.length < 280 && setNewTweetInput(e.target.value.slice(0, 280))} value={newTweetInput}></input>
             <div className={styles.inputUnderSection}>
               <div>{newTweetInput.length}/280</div>
               <div className={styles.tweetButton} onClick={async () => { newTweetPost(); setNewTweetInput("") }}   >Tweet</div>
