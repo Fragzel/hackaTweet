@@ -6,6 +6,11 @@ import { faHeart, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function Tweet(props) {
 
+    const handleClick = (id) => {
+        props.removeTweet(id)
+        // console.log("id", id)
+    }
+
     return (
         <div className={styles.tweetContainer}>
             <div className={styles.imageAndUsername}>
@@ -22,7 +27,7 @@ function Tweet(props) {
             <div className={styles.faHeartContainer}>
                 <FontAwesomeIcon className={styles.faHeart} icon={faHeart} />
                 <span className={styles.count}>0</span>
-                <FontAwesomeIcon icon={faTrash} className={styles.faTrash} />
+                <FontAwesomeIcon icon={faTrash} className={styles.faTrash} onClick={() => { handleClick(props.id) }} />
             </div>
         </div>
     );
