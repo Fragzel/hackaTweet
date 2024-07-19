@@ -60,3 +60,7 @@
 .faTrash {
     margin-left: 10px;
 }
+
+.faTrash:hover {
+    cursor: pointer
+}
