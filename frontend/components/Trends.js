@@ -31,6 +31,7 @@ function Trends() {
             </main>
         </div>
     );
+
 }
 
 export default Trends;
