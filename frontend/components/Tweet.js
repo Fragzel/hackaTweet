@@ -1,10 +1,15 @@
 import styles from '../styles/Tweet.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 function Tweet(props) {
+
+    const handleClick = (id) => {
+        props.removeTweet(id)
+        // console.log("id", id)
+    }
 
     return (
         <div className={styles.tweetContainer}>
@@ -18,11 +23,11 @@ function Tweet(props) {
             </div>
             <div className={styles.messageAndHeart} >
                 <span>{props.message} </span>
-                <span>{/*insérer la date a laquelle le post a été crée. */}</span>
             </div>
             <div className={styles.faHeartContainer}>
                 <FontAwesomeIcon className={styles.faHeart} icon={faHeart} />
                 <span className={styles.count}>0</span>
+                <FontAwesomeIcon icon={faTrash} className={styles.faTrash} onClick={() => { handleClick(props.id) }} />
             </div>
         </div>
     );

@@ -21,18 +21,13 @@ function Home() {
     const request = await fetch("http://localhost:3000/posts/all")
     const response = await request.json()
     setallTweetInBd(response.allPosts)
-    console.log("res", response.allPosts)
-    dispatch(AddToTweetList(response.allPosts))
+
+
 
   }
   useEffect(() => {
     useEtFetch()
-
-
   }, []);
-
-  console.log("twit", tweet)
-
 
   const newTweetPost = async () => {
 
@@ -64,19 +59,22 @@ function Home() {
     }
   };
 
-  const Input = () => {
-    const handleKeyDown = (event) => {
-      if (event.key === 'Enter') {
-        newTweetPost()
-        setNewTweetInput("")
-      }
-    }
+  const removeTweet = async (postId) => {
+    console.log("postId", postId)
+    const tweetToRemove = await fetch('http://localhost:3000/posts/remove', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ postID: postId })
+    })
+    useEtFetch()
   }
-  console.log("alltwitindb", allTweetInBd)
+
+
 
   const tweetedList = allTweetInBd.map((data, i) => {
+    console.log(data._id)
     let dateDifference = timeSince(allTweetInBd[i].creationDate)
-    return <Tweet username={data.author.username} message={data.content} date={dateDifference} />
+    return <Tweet username={data.author.username} message={data.content} date={dateDifference} removeTweet={removeTweet} id={data._id} />
   }).reverse()
 
   return (
