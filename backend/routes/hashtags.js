@@ -29,6 +29,7 @@ router.post("/view", async (req, res) => {
     }
     const foundHashtag = await Hashtag.findOne({ name: req.body.hashtag }).populate('posts');
     if (foundHashtag) {
+        console.log(foundHashtag)
         if (foundHashtag.posts.length) {
             let posts = []
             for (let post of foundHashtag.posts) {

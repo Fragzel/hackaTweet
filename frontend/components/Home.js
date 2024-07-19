@@ -14,6 +14,7 @@ function Home() {
   const [completeHashtagString, setCompleteHashtagString] = useState('')
 
 
+
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
@@ -22,9 +23,9 @@ function Home() {
     if (newTweetInput.includes('#')) {
       const indexOfHashtagSymbol = newTweetInput.indexOf('#');
       console.log(indexOfHashtagSymbol);
-      setHashtagString(newTweetInput.slice(indexOfHashtagSymbol));
+      setHashtagString(newTweetInput.slice(indexOfHashtagSymbol + 1));
       if (hashtagString.includes(' ')) {
-        setCompleteHashtagString(hashtagString);
+        setCompleteHashtagString(hashtagString.slice(0, -1));
       }
     }
   }, [newTweetInput])
@@ -66,8 +67,7 @@ function Home() {
         content: newTweetInput
       })
     })
-    const response = newTweet.json();
-    useEtFetch()
+    const response = await newTweet.json();
 
     const addToHastags = async (data) => {
       const options = {
@@ -77,9 +77,9 @@ function Home() {
       };
       const request = await fetch("http://localhost:3000/hashtags/add", options)
       const response = await request.json();
-      console.log(response)
     }
     completeHashtagString && addToHastags(response);
+    useEtFetch()
   }
 
 

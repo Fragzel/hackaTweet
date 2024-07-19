@@ -6,6 +6,8 @@ import UserMenu from './UserMenu';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { trendSelector } from '../reducers/trend'
+
 function TrendsList() {
 
   const trend = useSelector((state) => state.trend)
@@ -29,7 +31,7 @@ function TrendsList() {
     const request = await fetch("http://localhost:3000/hashtags/view", options);
     const response = await request.json()
     response.hashtag ? setallTweetInBd(response.posts) : setallTweetInBd([])
-    dispatch(AddToTweetList(response.hashtag))
+    dispatch(trendSelector(response.hashtag))
   }
   useEffect(() => {
     useEtFetch()
