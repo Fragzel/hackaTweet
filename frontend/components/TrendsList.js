@@ -5,7 +5,6 @@ import UserMenu from './UserMenu';
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddToTweetList } from '../reducers/tweet';
 
 function TrendsList() {
 

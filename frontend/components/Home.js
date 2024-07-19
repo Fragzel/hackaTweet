@@ -5,25 +5,30 @@ import Tweet from './Tweet';
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddToTweetList } from '../reducers/tweet';
 
 function Home() {
   const [newTweetInput, setNewTweetInput] = useState('')
   const [allTweetInBd, setallTweetInBd] = useState([])
   const [allLikedPosts, setAllLikedPosts] = useState([])
+  const [hashtagString, setHashtagString] = useState('')
 
 
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
 
-
+  const recupererHashtag = () => {
+    if (newTweetInput.includes('#')) {
+      const indexOfHashtagSymbol = newTweetInput.indexOf('#');
+      console.log(indexOfHashtagSymbol);
+      // setHashtagString(newTweetInput.slice(indexOfHashtagSymbol, -1))
+    }
+  }
 
   const useEtFetch = async () => {
     const request = await fetch("http://localhost:3000/posts/all")
     const response = await request.json()
     setallTweetInBd(response.allPosts)
-    // console.log(response.allPosts)
 
     const requestLikedPosts = await fetch("http://localhost:3000/users/allLikedPosts", {
       method: 'POST',
@@ -33,24 +38,11 @@ function Home() {
     const allLikedPostsResponse = await requestLikedPosts.json()
     setAllLikedPosts([])
     setAllLikedPosts(allLikedPostsResponse.allLikedPosts)
-
-    // for (let i = 0; i < allLikedPostsResponse.allLikedPosts.length; i++) {
-    //   for (let j = 0; j < response.allPosts.length; j++) {
-    //     // console.log("reponse all post boucle j", response.allPosts[j]._id)
-    //     // console.log("alllikedresponse", allLikedPostsResponse)
-    //     if (response.allPosts[j]._id === allLikedPostsResponse.allLikedPosts[i]) {
-
-    //     }
-
-    // }
-    // }
-
   }
   useEffect(() => {
     useEtFetch()
   }, []);
 
-  console.log("allLikedPost", allLikedPosts)
   const newTweetPost = async () => {
 
     const newTweet = await fetch('http://localhost:3000/posts/add', {
@@ -97,7 +89,6 @@ function Home() {
       body: JSON.stringify({ postID: idAndUsername.postID, username: user.username, token: user.token })
     })
     const response = await likeFetch.json()
-    console.log("response", response.likedPosts)
     useEtFetch()
   }
 
@@ -107,7 +98,6 @@ function Home() {
     let heartStyle;
     if (allLikedPosts.includes(data._id)) {
       heartStyle = { color: "red" }
-      console.log("oucoucou")
     } else {
       heartStyle = { color: "white" }
     }
@@ -136,7 +126,7 @@ function Home() {
           </div>
 
           <div className={styles.inputBlock}>
-            <input className={styles.input} type='text' maxLength='280' placeholder={"What's up ?"} onChange={(e) => newTweetInput.length < 280 && setNewTweetInput(e.target.value.slice(0, 280))} value={newTweetInput}></input>
+            <input className={styles.input} type='text' maxLength='280' placeholder={"What's up ?"} onChange={(e) => newTweetInput.length < 280 && setNewTweetInput(e.target.value.slice(0, 280)) && recupererHashtag()} value={newTweetInput}></input>
             <div className={styles.inputUnderSection}>
               <div>{newTweetInput.length}/280</div>
               <div className={styles.tweetButton} onClick={async () => { newTweetPost(); setNewTweetInput("") }}   >Tweet</div>
