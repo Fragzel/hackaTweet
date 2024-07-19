@@ -7,10 +7,13 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { trendSelector } from '../reducers/trend'
+import { useRouter } from 'next/router';
 
 function TrendsList() {
 
-  const trend = useSelector((state) => state.trend)
+  const router = useRouter();
+
+  const trend = router.query.name
 
   const [newSearchInput, setNewSearchInput] = useState(`${trend || ''}`)
   const [allTweetInBd, setallTweetInBd] = useState([])
@@ -19,6 +22,9 @@ function TrendsList() {
 
   const user = useSelector((state) => state.user);
 
+  const changeHashTagName = (input) => {
+    setNewSearchInput(input)
+  }
 
   const useEtFetch = async () => {
     const options = {
@@ -79,7 +85,7 @@ function TrendsList() {
         </div>
 
         <div className={styles.rightsection}>
-          <Trends />
+          <Trends changeHashTagName={changeHashTagName} />
         </div>
       </main>
     </div>

@@ -1,14 +1,13 @@
 import styles from '../styles/Trends.module.css';
 
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
 
-import { trendSelector } from '../reducers/trend'
+import { useRouter } from 'next/router'
 
-function Trends() {
+function Trends(props) {
 
     const [allTrends, setAllTrends] = useState([]);
-    const dispatch = useDispatch();
+    const router = useRouter();
 
     useEffect(() => {
         const getAllTrends = async () => {
@@ -21,7 +20,13 @@ function Trends() {
 
     const displayAllTrends = allTrends.map((trend, i) => {
         return <div className={styles.trendContainer} key={i}>
-            <a href='/trends' className={styles.title} onClick={() => dispatch(trendSelector(trend.name))}>#{trend.name}</a>
+            <div className={styles.title} onClick={() => {
+                router.push({
+                    pathname: '/trends',
+                    query: { name: trend.name },
+                }, '/trends');
+                props.changeHashTagName(trend.name)
+            }}>#{trend.name}</div>
             <div className={styles.tweets}>{trend.posts.length} tweets</div>
         </div>
     })

@@ -13,6 +13,11 @@
     padding-bottom: 15px;
 }
 
+.title:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .title a {
     color: #0070f3;
     text-decoration: none;
