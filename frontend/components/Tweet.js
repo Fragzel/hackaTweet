@@ -30,8 +30,8 @@ function Tweet(props) {
             </div>
             <div className={styles.faHeartContainer}>
                 <FontAwesomeIcon className={styles.faHeart} icon={faHeart} style={props.liked} onClick={() => { likeClick({ postID: props.id, username: props.username }) }} />
-                <span className={styles.count}>0</span>
-                <FontAwesomeIcon icon={faTrash} className={styles.faTrash} onClick={() => { handleClick(props.id) }} />
+                <span className={styles.count}>{props.likedCount}</span>
+                {user.username === props.username && <FontAwesomeIcon icon={faTrash} className={styles.faTrash} onClick={() => { handleClick(props.id) }} />}
             </div>
         </div>
     );

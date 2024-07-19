@@ -111,6 +111,7 @@ function Home() {
       id={data._id}
       likePost={likePost}
       liked={heartStyle}
+      likedCount={data.likedCount}
     />
   }).reverse()
 
