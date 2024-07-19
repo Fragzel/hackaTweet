@@ -150,7 +150,7 @@ function Home() {
 
         </div>
         <div className={styles.rightsection}>
-          {/* <Trends></Trends> */}
+          <Trends />
         </div>
       </main>
     </div>

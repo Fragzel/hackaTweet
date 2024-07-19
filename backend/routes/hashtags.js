@@ -22,15 +22,19 @@ router.get("/all", async (req, res) => {
 
 
 // VIEW ALL POST WITH THIS HASHTAG
-router.get("/view", async (req, res) => {
+router.post("/view", async (req, res) => {
     if (!checkBody(req.body, ['hashtag'])) {
         res.json({ result: false, error: 'Missing or empty fields' });
         return;
     }
-    const foundHashtag = await Hashtag.findOne({ name: req.body.hashtag })
+    const foundHashtag = await Hashtag.findOne({ name: req.body.hashtag }).populate('posts');
     if (foundHashtag) {
         if (foundHashtag.posts.length) {
-            res.send({ result: true, foundHashtag })
+            let posts = []
+            for (let post of foundHashtag.posts) {
+                posts.push(await post.populate('author'))
+            }
+            res.send({ result: true, hashtag: foundHashtag.name, posts: posts })
         } else {
             await Hashtag.deleteOne(foundHashtag);
             res.send({ result: true, message: 'Empty Hashtag was deleted' })
