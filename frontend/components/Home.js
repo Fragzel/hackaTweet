@@ -64,14 +64,7 @@ function Home() {
     }
   };
 
-  const Input = () => {
-    const handleKeyDown = (event) => {
-      if (event.key === 'Enter') {
-        newTweetPost()
-        setNewTweetInput("")
-      }
-    }
-  }
+
   console.log("alltwitindb", allTweetInBd)
 
   const tweetedList = allTweetInBd.map((data, i) => {
