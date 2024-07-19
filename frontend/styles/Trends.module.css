@@ -1,15 +1,16 @@
 .main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
-    padding: 4rem 0;
 }
 
 .title {
     line-height: 1.15;
-    font-size: 4rem;
+    font-size: small;
+    font-weight: 600;
+    padding-bottom: 15px;
 }
 
 .title a {
@@ -21,4 +22,28 @@
 .title a:focus,
 .title a:active {
     text-decoration: underline;
+}
+
+.rightheader {
+    font-weight: 600;
+    font-size: large;
+    margin: 10px;
+    text-align: left;
+    width: 30vw;
+}
+
+.tweets {
+    font-size: small;
+    color: grey;
+    padding-bottom: 10px;
+}
+
+.trendContainer {
+    padding: 10px;
+}
+
+.hashTagList {
+    background-color: #1B232C;
+    border-radius: 10px;
+    width: 90%;
 }

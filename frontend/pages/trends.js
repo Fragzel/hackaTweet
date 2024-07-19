@@ -1,11 +1,11 @@
-import Home from '../components/Home';
+import TrendsList from '../components/TrendsList';
 import Login from './login'
 import { useSelector } from 'react-redux';
 
-function Index() {
+function TrendsPage() {
   const isConnected = useSelector((state) => state.user.isConnected)
   console.log(isConnected);
-  return isConnected ? <Home /> : <Login />;
+  return isConnected ? <TrendsList /> : <Login />;
 }
 
-export default Index;
+export default TrendsPage;

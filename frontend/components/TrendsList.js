@@ -1,60 +1,43 @@
-import styles from '../styles/Home.module.css';
+import styles from '../styles/TrendsList.module.css';
 import Trends from './Trends';
-import UserMenu from './UserMenu';
 import Tweet from './Tweet';
+import UserMenu from './UserMenu';
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddToTweetList } from '../reducers/tweet';
 
-function Home() {
-  const [newTweetInput, setNewTweetInput] = useState('')
+function TrendsList() {
+
+  const [newSearchInput, setNewSearchInput] = useState('')
   const [allTweetInBd, setallTweetInBd] = useState([])
 
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
-  const tweet = useSelector((state) => state.tweet);
-
 
   const useEtFetch = async () => {
-    const request = await fetch("http://localhost:3000/posts/all")
-    const response = await request.json()
-    setallTweetInBd(response.allPosts)
-    console.log("res", response.allPosts)
-    dispatch(AddToTweetList(response.allPosts))
-
-  }
-  useEffect(() => {
-    useEtFetch()
-
-
-  }, []);
-
-  console.log("twit", tweet)
-
-
-  const newTweetPost = async () => {
-
-    const newTweet = await fetch('http://localhost:3000/posts/add', {
+    const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        author: user.username,
-        token: user.token,
-        content: newTweetInput
+        hashtag: newSearchInput
       })
-    })
-    useEtFetch()
+    }
+    const request = await fetch("http://localhost:3000/hashtags/view", options);
+    const response = await request.json()
+    response.hashtag ? setallTweetInBd(response.posts) : setallTweetInBd([])
+    dispatch(AddToTweetList(response.hashtag))
   }
-
+  useEffect(() => {
+    useEtFetch()
+  }, [newSearchInput]);
 
   const timeSince = dateString => {
     const elapsedMs = new Date() - new Date(dateString);
     const elapsedSec = Math.floor(elapsedMs / 1000);
     const elapsedMin = Math.floor(elapsedSec / 60);
     const elapsedHrs = Math.floor(elapsedMin / 60);
-
     if (elapsedSec < 60) {
       return `${elapsedSec} secondes`;
     } else if (elapsedMin < 60) {
@@ -64,19 +47,11 @@ function Home() {
     }
   };
 
-  const Input = () => {
-    const handleKeyDown = (event) => {
-      if (event.key === 'Enter') {
-        newTweetPost()
-        setNewTweetInput("")
-      }
-    }
-  }
-  console.log("alltwitindb", allTweetInBd)
-
+  console.log("allTweetInBd ", allTweetInBd)
   const tweetedList = allTweetInBd.map((data, i) => {
     let dateDifference = timeSince(allTweetInBd[i].creationDate)
-    return <Tweet username={data.author.username} message={data.content} date={dateDifference} />
+    return (
+      <Tweet username={data.author.username} message={data.content} date={dateDifference} />)
   }).reverse()
 
   return (
@@ -87,27 +62,17 @@ function Home() {
         </div>
         <div className={styles.centersection}>
           <div className={styles.centerheader}>
-            <div>Home</div>
+            <div>Hashtag</div>
           </div>
 
           <div className={styles.inputBlock}>
-            <input className={styles.input} type='text' maxLength='280' placeholder={"What's up ?"} onChange={(e) => newTweetInput.length < 280 && setNewTweetInput(e.target.value.slice(0, 280))} value={newTweetInput}></input>
-            <div className={styles.inputUnderSection}>
-              <div>{newTweetInput.length}/280</div>
-              <div className={styles.tweetButton} onClick={async () => { newTweetPost(); setNewTweetInput("") }}   >Tweet</div>
-            </div>
+            <input className={styles.input} type='text' maxLength='280' placeholder={"#Hashtag name"} onChange={(e) => newSearchInput.length < 280 && setNewSearchInput(e.target.value.slice(0, 280))} value={newSearchInput}></input>
           </div>
 
           <div >
             {tweetedList}
           </div>
-
-
         </div>
-
-
-
-
 
         <div className={styles.rightsection}>
           <Trends />
@@ -117,4 +82,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default TrendsList;
