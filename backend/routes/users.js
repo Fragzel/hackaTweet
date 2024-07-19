@@ -60,19 +60,31 @@ router.post('/logout', function (req, res) {
   res.json({ result: true, message: 'Successfully disconnected' });
 });
 
-//LIKE POST
+//Update likeStatus POST
 router.post('/likePost', async function (req, res) {
   if (req.body.username && req.body.token && req.body.postID) {
     const foundUser = await User.findOne({ username: req.body.username, token: req.body.token });
-    foundUser.likedPosts.push(req.body.postID);
-    foundUser.save();
-    res.json({ result: true, like: !req.body.like });
+    console.log("founduser", foundUser)
+    console.log("req.body username ", req.body.username)
+    if (foundUser && !foundUser.likedPosts.includes(req.body.postID)) {
+      foundUser.likedPosts.push(req.body.postID);
+      foundUser.save();
+
+    } else if (foundUser && foundUser.likedPosts.includes(req.body.postID)) {
+      let test = foundUser.likedPosts
+      test = foundUser.likedPosts.filter(e => e !== req.body.postID);
+      console.log("test", test)
+      foundUser.save()
+
+    }
+    res.json({ result: true, like: !req.body.like, likedPosts: foundUser.likedPosts });
+
   } else {
     res.json({ result: false, error: "Please login and use correct post ID" });
   }
 });
 
-//UNLIKE POST
+//UNLIKE POST A supprimer
 router.post("/unlikePost", async function (req, res) {
   if (req.body.username && req.body.token && req.body.postID) {
     const foundUser = await User.findOne({ username: req.body.username, token: req.body.token });
@@ -85,5 +97,10 @@ router.post("/unlikePost", async function (req, res) {
   }
 });
 
+//GET ALL LIKED POSTS
+router.post("/allLikedPosts", async (req, res) => {
+  const foundAllLiked = await User.findOne({ token: req.body.token })
+  res.send({ result: true, allLikedPosts: foundAllLiked.likedPosts });
+})
 
 module.exports = router;
