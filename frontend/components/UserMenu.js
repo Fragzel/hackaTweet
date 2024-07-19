@@ -12,8 +12,10 @@ function UserMenu() {
     <div>
       <main className={styles.main}>
         <div className={styles.menubutton}>
-          <a href='/'></a>
-          <img src="/images/logo_twitter.png" alt="twitterLogo" className={styles.logoTwitter} onClick={() => dispatch(logout())}></img>
+          <a href='/'>
+            <img src="/images/logo_twitter.png" alt="twitterLogo" className={styles.logoTwitter}></img>
+          </a>
+
         </div>
 
         <div>

@@ -3,8 +3,7 @@ import Login from './login'
 import { useSelector } from 'react-redux';
 
 function TrendsPage() {
-  const isConnected = useSelector((state) => state.user.isConnected)
-  console.log(isConnected);
+  const isConnected = useSelector((state) => state.user.isConnected);
   return isConnected ? <TrendsList /> : <Login />;
 }
 

@@ -9,12 +9,15 @@ import { AddToTweetList } from '../reducers/tweet';
 
 function TrendsList() {
 
-  const [newSearchInput, setNewSearchInput] = useState('')
+  const trend = useSelector((state) => state.trend)
+
+  const [newSearchInput, setNewSearchInput] = useState(`${trend || ''}`)
   const [allTweetInBd, setallTweetInBd] = useState([])
 
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
+
 
   const useEtFetch = async () => {
     const options = {
@@ -47,7 +50,7 @@ function TrendsList() {
     }
   };
 
-  console.log("allTweetInBd ", allTweetInBd)
+
   const tweetedList = allTweetInBd.map((data, i) => {
     let dateDifference = timeSince(allTweetInBd[i].creationDate)
     return (

@@ -60,7 +60,6 @@ function Home() {
   };
 
   const removeTweet = async (postId) => {
-    console.log("postId", postId)
     const tweetToRemove = await fetch('http://localhost:3000/posts/remove', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -72,7 +71,6 @@ function Home() {
 
 
   const tweetedList = allTweetInBd.map((data, i) => {
-    console.log(data._id)
     let dateDifference = timeSince(allTweetInBd[i].creationDate)
     return <Tweet username={data.author.username} message={data.content} date={dateDifference} removeTweet={removeTweet} id={data._id} />
   }).reverse()
