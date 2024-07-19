@@ -24,7 +24,7 @@ router.post('/add', async (req, res) => {
       creationDate: Date.now()
     })
     newPost.save();
-    res.json({ result: true, message: 'New post saved in database' });
+    res.json({ result: true, message: 'New post saved in database', postId: newPost._id });
 
   } else {
     res.json({ result: false, error: 'Invalid token / user' });
