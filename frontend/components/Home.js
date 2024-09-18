@@ -2,7 +2,6 @@ import styles from '../styles/Home.module.css';
 import Trends from './Trends';
 import UserMenu from './UserMenu';
 import Tweet from './Tweet';
-
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
